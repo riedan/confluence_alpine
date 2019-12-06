@@ -28,7 +28,7 @@ RUN ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so \
     && ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
 ENV LD_LIBRARY_PATH /usr/lib
 
-ARG CONFLUENCE_VERSION
+ARG CONFLUENCE_VERSION 7.1.1
 ARG DOWNLOAD_URL=https://product-downloads.atlassian.com/software/confluence/downloads/atlassian-confluence-${CONFLUENCE_VERSION}.tar.gz
 
 RUN addgroup -g ${RUN_GID} ${RUN_GROUP} \
@@ -45,7 +45,7 @@ RUN addgroup -g ${RUN_GID} ${RUN_GROUP} \
     \
     && sed -i -e 's/-Xms\([0-9]\+[kmg]\) -Xmx\([0-9]\+[kmg]\)/-Xms\${JVM_MINIMUM_MEMORY:=\1} -Xmx\${JVM_MAXIMUM_MEMORY:=\2} \${JVM_SUPPORT_RECOMMENDED_ARGS} -Dconfluence.home=\${CONFLUENCE_HOME}/g' ${CONFLUENCE_INSTALL_DIR}/bin/setenv.sh
 
-VOLUME ["${CONFLUENCE_HOME}"] # Must be declared after setting perms
+VOLUME ["${CONFLUENCE_HOME}"]
 
 COPY entrypoint.py \
      shared-components/image/entrypoint_helpers.py  /
