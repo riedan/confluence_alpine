@@ -44,7 +44,8 @@
                  acceptCount="100"
                  scheme="https"
                  secure="true"
-                 clientAuth="false" sslProtocol="TLS" SSLEnabled="{{ atl_sslenabled | default('false') }}"
+                 clientAuth="false" sslProtocol="TLS"
+                 SSLEnabled="{{ atl_sslenabled | default('false') }}"
                  URIEncoding="UTF-8"
                  keystorePass="{{ atl_certificate_password | default('changeit') }}
                  keystoreFile="{{ atl_certificate_location | default('/opt/atlassian/confluence/keystore') }}
