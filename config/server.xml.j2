@@ -32,7 +32,7 @@
                useBodyEncodingForURI="true"
                disableUploadTimeout="true" />
 
-    {{ atl_sslenabled == "true" | ternary("","<!--")  }}
+    {% if atl_sslenabled == 'true'  %}
 
      <Connector port="{{ atl_tls_tomcat_port | default('8443') }}"
                  maxHttpHeaderSize="8192"
@@ -51,7 +51,7 @@
                  keystoreFile="{{ atl_certificate_location | default('/opt/atlassian/confluence/keystore') }}
                    />
 
-    {{ atl_sslenabled == "true" | ternary("","-->")  }}
+    {% endif %}
 
     <Engine name="Standalone"
             defaultHost="localhost"

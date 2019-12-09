@@ -1751,7 +1751,7 @@
         <location>/notpermitted.action</location>
     </error-page>
 
-{{ atl_sslenabled == "true" | ternary("","<!--")  }}
+{% if atl_sslenabled == "true" }
     <security-constraint>
       <web-resource-collection>
         <web-resource-name>Restricted URLs</web-resource-name>
@@ -1761,5 +1761,5 @@
         <transport-guarantee>CONFIDENTIAL</transport-guarantee>
       </user-data-constraint>
     </security-constraint>
-    {{ atl_sslenabled == "true" | ternary("","-->")  }}
+    {% endif %}
 </web-app>
