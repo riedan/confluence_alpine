@@ -20,10 +20,10 @@ gen_cfg('web.xml.j2', f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/web.xml',
         user=RUN_USER, group=RUN_GROUP, overwrite=False)
 
 
-set_perms('{CONFLUENCE_INSTALL_DIR}/conf', RUN_USER, RUN_GROUP, 700)
-set_perms('{CONFLUENCE_INSTALL_DIR}/logs', RUN_USER, RUN_GROUP, 700)
-set_perms('{CONFLUENCE_INSTALL_DIR}/temp', RUN_USER, RUN_GROUP, 700)
-set_perms('{CONFLUENCE_INSTALL_DIR}/work', RUN_USER, RUN_GROUP, 700)
-set_perms('{CONFLUENCE_HOME}', RUN_USER, RUN_GROUP, 700)
+set_perms(f'{CONFLUENCE_INSTALL_DIR}/conf', RUN_USER, RUN_GROUP, 700)
+set_perms(f'{CONFLUENCE_INSTALL_DIR}/logs', RUN_USER, RUN_GROUP, 700)
+set_perms(f'{CONFLUENCE_INSTALL_DIR}/temp', RUN_USER, RUN_GROUP, 700)
+set_perms(f'{CONFLUENCE_INSTALL_DIR}/work', RUN_USER, RUN_GROUP, 700)
+set_perms(f'{CONFLUENCE_HOME}', RUN_USER, RUN_GROUP, 700)
 
 start_app(f'{CONFLUENCE_INSTALL_DIR}/bin/start-confluence.sh -fg', CONFLUENCE_HOME, name='Confluence')
