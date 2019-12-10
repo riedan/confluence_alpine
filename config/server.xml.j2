@@ -18,7 +18,7 @@
                connectionTimeout="{{ atl_tomcat_connectiontimeout | default('20000') }}"
                enableLookups="{{ atl_tomcat_enablelookups | default('false') }}"
                protocol="{{ atl_tomcat_protocol | default('HTTP/1.1') }}"
-               redirectPort="{{ atl_tls_tomcat_port|  atl_tomcat_redirectport | default('8443') }}"
+               redirectPort="{{ atl_tls_tomcat_port|  default(atl_tomcat_redirect_port) | default('8443') }}"
                acceptCount="{{ atl_tomcat_acceptcount | default('10') }}"
                secure="{{ atl_tomcat_secure | default(catalina_connector_secure) | default('false') }}"
                scheme="{{ atl_tomcat_scheme | default(catalina_connector_scheme) | default('http') }}"
