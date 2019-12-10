@@ -40,6 +40,14 @@ def set_perms(path, user, group, mode):
             shutil.chown(os.path.join(dirpath, filename), user=user, group=group)
             os.chmod(os.path.join(dirpath, filename), mode)
 
+
+def set_ownership(path, user, group):
+    shutil.chown(path, user=user, group=group)
+    for dirpath, dirnames, filenames in os.walk(path):
+        shutil.chown(dirpath, user=user, group=group)
+        for filename in filenames:
+            shutil.chown(os.path.join(dirpath, filename), user=user, group=group)
+
 def check_perms(path, uid, gid, mode):
     stat = os.stat(path)
     return all([

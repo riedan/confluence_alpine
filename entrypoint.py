@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import shutil
-from entrypoint_helpers import env, gen_cfg, str2bool, start_app, set_perms
+from entrypoint_helpers import env, gen_cfg, str2bool, start_app, set_perms, set_ownership
 
 
 RUN_USER = env['run_user']
@@ -20,9 +20,9 @@ gen_cfg('web.xml.j2', f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/web.xml',
         user=RUN_USER, group=RUN_GROUP)
 
 
-set_perms(f'{CONFLUENCE_INSTALL_DIR}/logs',  user=RUN_USER, group=RUN_GROUP, mode=0o644)
-set_perms(f'{CONFLUENCE_INSTALL_DIR}/temp',  user=RUN_USER, group=RUN_GROUP, mode=0o644)
-set_perms(f'{CONFLUENCE_INSTALL_DIR}/work',  user=RUN_USER, group=RUN_GROUP, mode=0o644)
+set_ownership(f'{CONFLUENCE_INSTALL_DIR}/logs',  user=RUN_USER, group=RUN_GROUP, mode=0o644)
+set_ownership(f'{CONFLUENCE_INSTALL_DIR}/temp',  user=RUN_USER, group=RUN_GROUP, mode=0o644)
+set_ownership(f'{CONFLUENCE_INSTALL_DIR}/work',  user=RUN_USER, group=RUN_GROUP, mode=0o644)
 
 shutil.chown(CONFLUENCE_HOME, user=RUN_USER, group=RUN_GROUP)
 
