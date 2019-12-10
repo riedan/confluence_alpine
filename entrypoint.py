@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import shutil
 from entrypoint_helpers import env, gen_cfg, str2bool, start_app, set_perms
 
 
