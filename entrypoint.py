@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from entrypoint_helpers import env, gen_cfg, str2bool, start_app
+from entrypoint_helpers import env, gen_cfg, str2bool, start_app, set_perms
 
 
 RUN_USER = env['run_user']
@@ -18,5 +18,12 @@ gen_cfg('confluence.cfg.xml.j2', f'{CONFLUENCE_HOME}/confluence.cfg.xml',
 
 gen_cfg('web.xml.j2', f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/web.xml',
         user=RUN_USER, group=RUN_GROUP, overwrite=False)
+
+
+set_perms('{CONFLUENCE_INSTALL_DIR}/conf', RUN_USER, RUN_GROUP, 700)
+set_perms('{CONFLUENCE_INSTALL_DIR}/logs', RUN_USER, RUN_GROUP, 700)
+set_perms('{CONFLUENCE_INSTALL_DIR}/temp', RUN_USER, RUN_GROUP, 700)
+set_perms('{CONFLUENCE_INSTALL_DIR}/work', RUN_USER, RUN_GROUP, 700)
+set_perms('{CONFLUENCE_HOME}', RUN_USER, RUN_GROUP, 700)
 
 start_app(f'{CONFLUENCE_INSTALL_DIR}/bin/start-confluence.sh -fg', CONFLUENCE_HOME, name='Confluence')
