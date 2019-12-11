@@ -14,7 +14,7 @@ gen_cfg('seraph-config.xml.j2',
 gen_cfg('confluence-init.properties.j2',
         f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/classes/confluence-init.properties')
 gen_cfg('confluence.cfg.xml.j2', f'{CONFLUENCE_HOME}/confluence.cfg.xml',
-        user=RUN_USER, group=RUN_GROUP, overwrite=False)
+        user=RUN_USER, group=RUN_GROUP, overwrite=True)
 
 gen_cfg('web.xml.j2', f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/web.xml')
 
