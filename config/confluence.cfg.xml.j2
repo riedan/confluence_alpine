@@ -7,6 +7,14 @@
   <buildNumber>0</buildNumber>
 
   <properties>
+    {% if atl_setup_server_id is defined %}
+      <property name="confluence.setup.server.id">{{ atl_setup_server_id }}</property>
+    {% endif %}
+
+    {% if atl_licence_message is defined %}
+      <property name="atlassian.license.message">{{ atl_licence_message }}</property>
+    {% endif %}
+
     <property name="confluence.database.connection.type">database-type-standard</property>
     <property name="webwork.multipart.saveDir">${localHome}/temp</property>
     <property name="attachments.dir">${confluenceHome}/attachments</property>
@@ -25,7 +33,7 @@
       <property name="hibernate.connection.password">{{ atl_jdbc_password }}</property>
       <property name="hibernate.connection.driver_class">{{ databases[atl_db_type][0] }}</property>
       <property name="hibernate.dialect">com.atlassian.confluence.impl.hibernate.dialect.{{ databases[atl_db_type][1] }}</property>
-
+      <property name="hibernate.database.lower_non_ascii_supported">true</property>
       <property name="hibernate.c3p0.min_size">{{ atl_db_poolminsize | default('20') }}</property>
       <property name="hibernate.c3p0.max_size">{{ atl_db_poolmaxsize | default('100') }}</property>
       <property name="hibernate.c3p0.timeout">{{ atl_db_timeout | default('30') }}</property>
@@ -64,5 +72,23 @@
 
     {% endif %}
 
+     {% if alt_jwt_private_key is defined %}
+          <property name="jwt.private.key">{{ alt_jwt_private_key }}</property>
+     {% endif %}
+
+     {% if alt_jwt_public_key is defined %}
+          <property name="jwt.public.key"">{{ alt_jwt_public_key }}</property>
+     {% endif %}
+
+      <property name="lucene.index.dir">{{ atl_lucene_index_dir | default('${localHome}/index') }}</property>
+
+      {% if alt_synchrony_btf is defined && alt_synchrony_btf == 'true' %}
+         <property name="synchrony.btf">true</property>
+         <property name="synchrony.btf.off">{{  alt_synchrony_btf_off | default ('true')  }}</property>
+         <property name="synchrony.encryption.disabled">>{{  alt_synchrony_encryption_disabled | default ('true')  }}</property>
+         <property name="synchrony.proxy.enabled">{{  alt_synchrony_proxy_enabled | default ('true')  }}</property>
+      {% endif %}
+
+      <property name="webwork.multipart.saveDir">{{ atl_webwork_multipart_saveDir | default('${localHome}/index') }}</property>
   </properties>
 </confluence-configuration>
