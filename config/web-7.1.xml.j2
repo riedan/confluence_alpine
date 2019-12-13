@@ -146,7 +146,7 @@
         <filter-class>com.atlassian.confluence.jmx.JmxFilter</filter-class>
     </filter>
 
-     <filter>
+    <filter>
         <filter-name>request-param-cleaner</filter-name>
         <filter-class>com.atlassian.confluence.web.filter.validateparam.RequestParamValidationFilter</filter-class>
         <init-param>
@@ -161,10 +161,10 @@
         <filter-class>com.atlassian.confluence.internal.web.filter.spring.IgnoreWebAsyncManagerFilter</filter-class>
     </filter>
 
-      <!--USE WITH CAUTION!
-      This filter will drop any request that comes in when Confluence is not finished setting up.
-      To prevent this from dropping valid requests ensure that the filter url mapping maps to exactly the request you want
-      to drop.-->
+    <!--USE WITH CAUTION!
+    This filter will drop any request that comes in when Confluence is not finished setting up.
+    To prevent this from dropping valid requests ensure that the filter url mapping maps to exactly the request you want
+    to drop.-->
     <filter>
         <filter-name>dropIfNotSetupFilter</filter-name>
         <filter-class>com.atlassian.confluence.web.filter.DropIfNotSetupFilter</filter-class>
@@ -782,7 +782,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-     <filter-mapping>
+    <filter-mapping>
         <filter-name>language</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
@@ -1751,15 +1751,15 @@
         <location>/notpermitted.action</location>
     </error-page>
 
-{% if atl_sslenabled == "true" %}
+    {% if atl_sslenabled == "true" %}
     <security-constraint>
-      <web-resource-collection>
-        <web-resource-name>Restricted URLs</web-resource-name>
-        <url-pattern>/</url-pattern>
-      </web-resource-collection>
-      <user-data-constraint>
-        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-      </user-data-constraint>
+        <web-resource-collection>
+            <web-resource-name>Restricted URLs</web-resource-name>
+            <url-pattern>/</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     {% endif %}
 </web-app>
