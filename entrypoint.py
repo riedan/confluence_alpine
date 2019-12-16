@@ -22,7 +22,7 @@ gen_cfg('confluence-init.properties.j2',
 gen_cfg('confluence.cfg.xml.j2', f'{CONFLUENCE_HOME}/confluence.cfg.xml',
         user=RUN_USER, group=RUN_GROUP, overwrite=False)
 
-if SSL_ENABLED == 'True' or SSL_ENABLED == true or SSL_ENABLED == 'true' :
+if SSL_ENABLED == 'True' or SSL_ENABLED == True or SSL_ENABLED == 'true' :
   dom = xml.dom.minidom.parse(f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/web.xml')
   new_security_constraint = dom.createElement('security-constraint')
   web_resource_collection = dom.createElement('web-resource-collection')
