@@ -10,7 +10,7 @@ ENV RUN_GID                                         2002
 ENV CONFLUENCE_HOME                                 /var/atlassian/application-data/confluence
 ENV CONFLUENCE_INSTALL_DIR                          /opt/atlassian/confluence
 
-ENV ATL_SSLENABLED False
+ENV ATL_SSLENABLED 'False'
 
 WORKDIR $CONFLUENCE_HOME
 
