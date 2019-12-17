@@ -78,7 +78,7 @@
      {% endif %}
 
      {% if alt_jwt_public_key is defined %}
-          <property name="jwt.public.key"">{{ alt_jwt_public_key }}</property>
+          <property name="jwt.public.key">{{ alt_jwt_public_key }}</property>
      {% endif %}
 
       <property name="lucene.index.dir">{{ atl_lucene_index_dir | default('${localHome}/index') }}</property>
