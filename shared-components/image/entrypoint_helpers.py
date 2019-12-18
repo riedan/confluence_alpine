@@ -5,7 +5,9 @@ import logging
 import jinja2 as j2
 import uuid
 import base64
-
+import xml.dom.minidom
+import subprocess
+from subprocess import call
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -82,6 +84,43 @@ def str2bool(v):
     if str(v).lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     return False
+
+
+def activate_ssl(web_path, path_keystore, password_keystore, path_key, path_crt, path_ca, password_p12, path_p12)
+    dom = xml.dom.minidom.parse(web_path)
+
+    new_security_constraint = dom.createElement('security-constraint')
+    web_resource_collection = dom.createElement('web-resource-collection')
+    web_resource_name = dom.createElement('web-resource-name')
+    url_pattern = dom.createElement('url-pattern')
+    restricted_urls = dom.createTextNode("Restricted URLs")
+    path_url = dom.createTextNode("/")
+
+    web_resource_name.appendChild(restricted_urls)
+    url_pattern.appendChild(path_url)
+    web_resource_collection.appendChild(web_resource_name)
+    web_resource_collection.appendChild(url_pattern)
+
+    user_data_constraint = dom.createElement('user-data-constraint')
+    transport_guarantee = dom.createElement('transport-guarantee')
+    confident =  dom.createTextNode("CONFIDENTIAL")
+
+    transport_guarantee.appendChild(confident)
+    user_data_constraint.appendChild(transport_guarantee)
+    new_security_constraint.appendChild(web_resource_collection)
+    new_security_constraint.appendChild(user_data_constraint)
+
+    web_app = dom.getElementsByTagName('web-app')[0]
+    web_app.appendChild(new_security_constraint)
+
+    with open(web_path, "wb") as f:
+        dom.writexml(f)
+
+    if os.path.exists(path_crt) and os.path.exists(path_key)  and os.path.exists(path_ca) and not os.path.exists(path_p12)
+        myP12 = call(['openssl', 'pkcs12', '-in', path_crt, '-inkey', path_key, '-CAfile', path_ca, '-name', 'confluence','' "-out", path_p12 , '-password',  'pass:' + password_p12])
+
+    if os.path.exists(path_p12) and not os.path.exists(password_keystore)
+        myKeystore = call(['keytool', '-importkeystore', '-srckeystore' ,  path_p12,'-srcstoretype', 'pkcs12',  '-srcalias', '1', '-srcstorepass', password_p12, ' -destkeystore', 'path_keystore', '-deststoretype' , 'jks', '-deststorepass', password_keystore, '-destkeypass', password_keystore,  '-destalias', 'host_identity'])
 
 
 ######################################################################
