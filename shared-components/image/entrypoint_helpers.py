@@ -88,7 +88,8 @@ def str2bool(v):
 
 def activate_ssl(web_path, path_keystore, password_keystore, path_key, path_crt, path_ca, password_p12, path_p12):
     if  os.path.exists(web_path):
-        dom = xml.dom.minidom.parse(web_path)
+        datasource = open(web_path)
+        dom = xml.dom.minidom.parse(datasource)
 
         new_security_constraint = dom.createElement('security-constraint')
         web_resource_collection = dom.createElement('web-resource-collection')

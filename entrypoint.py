@@ -24,7 +24,6 @@ if SSL_ENABLED == 'True' or SSL_ENABLED == True or SSL_ENABLED == 'true' :
     PATH_P12= env.get('atl_p12_location', '/opt/atlassian/etc/certificate.p12')
     PASSWORD_P12 = env.get('atl_p12_password', 'confluence')
 
-
     activate_ssl( f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/web.xml', PATH_KEYSTORE, PASSWORD_KEYSTORE, PATH_CERTIFICATE_KEY, PATH_CERTIFICATE, PATH_CA, PASSWORD_P12, PATH_P12)
 
 gen_cfg('server.xml.j2', f'{CONFLUENCE_INSTALL_DIR}/conf/server.xml')
