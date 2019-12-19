@@ -88,7 +88,7 @@ def str2bool(v):
 
 def activate_ssl(web_path, path_keystore, password_keystore, path_key, path_crt, path_ca, password_p12, path_p12):
     if  os.path.exists(web_path):
-        tree = ET.parse(datasource)
+        tree = ET.parse(web_path)
         root = tree.getroot()
 
         new_security_constraint =  ET.SubElement(root, 'security-constraint')
