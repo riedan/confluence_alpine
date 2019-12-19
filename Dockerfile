@@ -37,6 +37,8 @@ ARG DOWNLOAD_URL=https://product-downloads.atlassian.com/software/confluence/dow
 
 ENV ATL_CERTIFICATE_PASSWORD 'changeit'
 ENV ATL_CERTIFICATE_LOCATION '/opt/atlassian/confluence/keystore'
+ENV ATL_CERTIFICATE_KEY_LOCATION  '/opt/atlassian/etc/certificate.key'
+ENV ATL_CERTIFICATE_LOCATION '/opt/atlassian/etc/certificate.crt'
 
 RUN addgroup -g ${RUN_GID} ${RUN_GROUP} \
     && adduser -u ${RUN_UID} -G ${RUN_GROUP} -h ${CONFLUENCE_HOME} -s /bin/bash -D ${RUN_USER} \
