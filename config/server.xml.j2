@@ -32,7 +32,7 @@
                useBodyEncodingForURI="true"
                disableUploadTimeout="true" />
 
-    {% if atl_sslenabled == 'true'  %}
+    {% if atl_sslenabled == 'true'  or atl_sslenabled == 'True' or atl_sslenabled == True  %}
 
      <Connector port="{{ atl_tls_tomcat_port | default('8443') }}"
                  maxHttpHeaderSize="8192"
