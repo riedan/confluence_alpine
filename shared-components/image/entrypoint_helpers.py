@@ -5,7 +5,7 @@ import logging
 import jinja2 as j2
 import uuid
 import base64
-import xml.dom.minidom
+import xml.etree.ElementTree as ET
 import subprocess
 from subprocess import call
 
@@ -88,35 +88,24 @@ def str2bool(v):
 
 def activate_ssl(web_path, path_keystore, password_keystore, path_key, path_crt, path_ca, password_p12, path_p12):
     if  os.path.exists(web_path):
-        datasource = open(web_path)
-        dom = xml.dom.minidom.parse(datasource)
+        tree = ET.parse(datasource)
+        root = tree.getroot()
 
-        new_security_constraint = dom.createElement('security-constraint')
-        web_resource_collection = dom.createElement('web-resource-collection')
-        web_resource_name = dom.createElement('web-resource-name')
-        url_pattern = dom.createElement('url-pattern')
-        restricted_urls = dom.createTextNode("Restricted URLs")
-        path_url = dom.createTextNode("/")
+        new_security_constraint =  ET.SubElement(root, 'security-constraint')
+        web_resource_collection = ET.SubElement(new_security_constraint, 'web-resource-collection')
+        user_data_constraint = ET.SubElement(new_security_constraint, 'user-data-constraint')
 
-        web_resource_name.appendChild(restricted_urls)
-        url_pattern.appendChild(path_url)
-        web_resource_collection.appendChild(web_resource_name)
-        web_resource_collection.appendChild(url_pattern)
 
-        user_data_constraint = dom.createElement('user-data-constraint')
-        transport_guarantee = dom.createElement('transport-guarantee')
-        confident =  dom.createTextNode("CONFIDENTIAL")
+        web_resource_name = ET.SubElement(web_resource_collection, 'web-resource-name')
+        url_pattern = ET.SubElement(web_resource_collection, 'url-pattern')
 
-        transport_guarantee.appendChild(confident)
-        user_data_constraint.appendChild(transport_guarantee)
-        new_security_constraint.appendChild(web_resource_collection)
-        new_security_constraint.appendChild(user_data_constraint)
+        transport_guarantee = ET.SubElement(user_data_constraint, 'transport-guarantee')
 
-        web_app = dom.getElementsByTagName('web-app')[0]
-        web_app.appendChild(new_security_constraint)
+        web_resource_name.text = "Restricted URLs"
+        url_pattern.text = "/"
+        transport_guarantee.text = "CONFIDENTIAL"
 
-        with open(web_path, "wb") as f:
-            dom.writexml(f)
+        tree.write(web_path)
 
     if os.path.exists(path_crt) and os.path.exists(path_key)  and os.path.exists(path_ca) and not os.path.exists(path_p12):
         myP12 = call(['openssl', 'pkcs12', '-in', path_crt, '-inkey', path_key, '-CAfile', path_ca, '-name', 'confluence','' "-out", path_p12 , '-password',  'pass:' + password_p12])
