@@ -49,7 +49,7 @@
       <property name="hibernate.c3p0.validate">{{ atl_db_validate | default('false') }}</property>
       <property name="hibernate.c3p0.acquire_increment">{{ atl_db_acquireincrement | default('1') }}</property>
       <property name="hibernate.c3p0.preferredTestQuery">{{ atl_db_validationquery | default('select 1') }}</property>
-      <property name="hibernate.connection.isolation" value="{{ atl_hibernate_connection_isolation | default('2') }}"/>
+      <property name="hibernate.connection.isolation">{{ atl_hibernate_connection_isolation | default('2') }}</property>
     {% endif %}
 
     {% if atl_cluster_type is defined %}
