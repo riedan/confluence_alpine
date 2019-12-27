@@ -85,9 +85,9 @@
 
       {% if alt_synchrony_btf is defined and alt_synchrony_btf == 'true' %}
          <property name="synchrony.btf">true</property>
-         <property name="synchrony.btf.off">{{  alt_synchrony_btf_off | default ("true")  }}</property>
-         <property name="synchrony.encryption.disabled">{{  alt_synchrony_encryption_disabled | default ("true")  }}</property>
-         <property name="synchrony.proxy.enabled">{{  alt_synchrony_proxy_enabled | default ("true")  }}</property>
+         <property name="synchrony.btf.off">{{  alt_synchrony_btf_off | default ('true')  }}</property>
+         <property name="synchrony.encryption.disabled">{{  alt_synchrony_encryption_disabled | default ('true')  }}</property>
+         <property name="synchrony.proxy.enabled">{{  alt_synchrony_proxy_enabled | default ('true')  }}</property>
       {% endif %}
 
   </properties>
