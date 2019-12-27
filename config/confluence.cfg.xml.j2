@@ -7,6 +7,13 @@
   <buildNumber>{{ alt_build_number | default('0')  }}</buildNumber>
 
   <properties>
+
+      {% if atl_admin_ui is defined %}
+         <property name="admin.ui.allow.daily.backup.custom.location">{{ atl_admin_ui_allow_daily_backup_custom_location }}</property>
+         <property name="admin.ui.allow.manual.backup.download">{{ atl_admin_ui_allow_manual_backup_download }}</property>
+         <property name="admin.ui.allow.site.support.email">{{ atl_admin_ui_allow_site_support_email }}</property>
+     {% endif %}
+
     {% if atl_setup_server_id is defined %}
       <property name="confluence.setup.server.id">{{ atl_setup_server_id }}</property>
     {% endif %}
