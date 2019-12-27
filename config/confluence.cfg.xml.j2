@@ -23,9 +23,10 @@
     {% endif %}
 
     <property name="confluence.database.connection.type">database-type-standard</property>
+
     <property name="webwork.multipart.saveDir">${localHome}/temp</property>
     <property name="attachments.dir">${confluenceHome}/attachments</property>
-
+    <property name="confluence.webapp.context.path">{{ atl_confluence_webapp_context_path | default('')  }}</property>
     {% if atl_jdbc_url is defined %}
       {% set databases =  {
            "mysql": ["com.mysql.jdbc.Driver", "MySQLDialect"],
