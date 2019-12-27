@@ -14,6 +14,8 @@
          <property name="admin.ui.allow.site.support.email">{{ atl_admin_ui_allow_site_support_email }}</property>
      {% endif %}
 
+
+
     {% if atl_setup_server_id is defined %}
       <property name="confluence.setup.server.id">{{ atl_setup_server_id }}</property>
     {% endif %}
@@ -51,6 +53,9 @@
       <property name="hibernate.c3p0.acquire_increment">{{ atl_db_acquireincrement | default('1') }}</property>
       <property name="hibernate.c3p0.preferredTestQuery">{{ atl_db_validationquery | default('select 1') }}</property>
       <property name="hibernate.connection.isolation">{{ atl_hibernate_connection_isolation | default('2') }}</property>
+       {% if alt_setup_step is defined and alt_setup_step == 'complete' %}
+               <property name="hibernate.setup">true</property>
+        {% endif %}
     {% endif %}
 
     {% if atl_cluster_type is defined %}
