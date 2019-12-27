@@ -2,9 +2,9 @@
 
 <confluence-configuration>
 
-  <setupStep>setupstart</setupStep>
+  <setupStep>{{ alt_setup_step | default('setupstart')  }}</setupStep>
   <setupType>custom</setupType>
-  <buildNumber>0</buildNumber>
+  <buildNumber>{{ alt_build_number | default('0')  }}</buildNumber>
 
   <properties>
     {% if atl_setup_server_id is defined %}

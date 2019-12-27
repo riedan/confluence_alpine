@@ -8,7 +8,7 @@ RUN_USER = env['run_user']
 RUN_GROUP = env['run_group']
 CONFLUENCE_INSTALL_DIR = env['confluence_install_dir']
 CONFLUENCE_HOME = env['confluence_home']
-
+CONFLUENCE_CFG_OVERWRITE =  env.get('atl_confluence_cfg_overwrite', False)
 
 SSL_ENABLED = env['atl_sslenabled']
 
@@ -32,7 +32,7 @@ gen_cfg('seraph-config.xml.j2',
 gen_cfg('confluence-init.properties.j2',
         f'{CONFLUENCE_INSTALL_DIR}/confluence/WEB-INF/classes/confluence-init.properties')
 gen_cfg('confluence.cfg.xml.j2', f'{CONFLUENCE_HOME}/confluence.cfg.xml',
-        user=RUN_USER, group=RUN_GROUP, overwrite=False)
+        user=RUN_USER, group=RUN_GROUP, overwrite=CONFLUENCE_CFG_OVERWRITE)
 
 
 
