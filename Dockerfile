@@ -60,7 +60,7 @@ COPY entrypoint.py \
      shared-components/image/entrypoint_helpers.py  /
 COPY shared-components/support                      /opt/atlassian/support
 COPY config/*                                       /opt/atlassian/etc/
-COPY config/web-${CONFLUENCE_WEB_VERSION}.xml.j2    /opt/atlassian/etc/web.xml.j2
+
 
 
 RUN chmod +x /entrypoint.py
