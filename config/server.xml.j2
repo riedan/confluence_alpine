@@ -88,6 +88,8 @@
                  useHttpOnly="true">
           <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve"
                  threshold="60"/>
+          <Valve className="org.apache.catalina.authenticator.NonLoginAuthenticator"
+                          disableProxyCaching="true" securePagesWithPragma="false" />
         </Context>
 
       </Host>

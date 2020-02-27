@@ -88,7 +88,7 @@ def str2bool(v):
 
 def activate_ssl(web_path, path_keystore, password_keystore, path_key, path_crt, path_ca, password_p12, path_p12):
     if  os.path.exists(web_path):
-        ET.register_namespace('', "http://java.sun.com/xml/ns/javaee")
+        ET.register_namespace('', "http://xmlns.jcp.org/xml/ns/javaee")
         ET.register_namespace('xsi', "http://www.w3.org/2001/XMLSchema-instance")
         tree = ET.parse(web_path)
         root = tree.getroot()
