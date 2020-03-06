@@ -26,11 +26,11 @@
                proxyPort="{{ atl_proxy_port | default(catalina_connector_proxyport) | default('') }}"
 
                relaxedPathChars="[]|"
-               relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;"
-               bindOnInit="false"
-               maxHttpHeaderSize="8192"
-               useBodyEncodingForURI="true"
-               disableUploadTimeout="true" />
+                relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;"
+                bindOnInit="false"
+                maxHttpHeaderSize="8192"
+                useBodyEncodingForURI="true"
+                disableUploadTimeout="true" />
 
     {% if atl_sslenabled == 'true'  or atl_sslenabled == 'True' or atl_sslenabled == True  %}
 
@@ -40,21 +40,25 @@
                  minSpareThreads="{{ atl_tomcat_minsparethreads | default('25') }}"
                  maxSpareThreads="{{ atl_tomcat_maxsparethreads | default('75') }}"
                  enableLookups="false"
-                 disableUploadTimeout="true"
-                 relaxedPathChars="[]|"
-                 relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;"
                  acceptCount="100"
                  scheme="https"
                  secure="true"
-                  useBodyEncodingForURI="true"
                  proxyName="{{ atl_proxy_name | default(catalina_connector_proxyname) | default('') }}"
                  proxyPort="{{ atl_proxy_port | default(catalina_connector_proxyport) | default('') }}"
                  clientAuth="false" sslProtocol="TLS"
                  SSLEnabled="{{ atl_sslenabled | default('false') }}"
                  SSLCertificateFile="{{ atl_certificate_location | default('/opt/atlassian/etc/certificate.crt') }}"
                  SSLCertificateKeyFile="{{ atl_certificate_key_location | default('/opt/atlassian/etc/certificate.key') }}"
+                 {% if  atl_certificate_password is defined and atl_certificate_location and atl_certificate_password != '' and atl_certificate_password != ''  %}
                  keystorePass="{{ atl_certificate_password | default('changeit') }}"
                  keystoreFile="{{ atl_certificate_location | default('/opt/atlassian/confluence/keystore') }}"
+                 {% endif  %}
+                 relaxedPathChars="[]|"
+                 relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;"
+                 bindOnInit="false"
+                 maxHttpHeaderSize="8192"
+                 useBodyEncodingForURI="true"
+                 disableUploadTimeout="true"
                    />
 
     {% endif %}
@@ -62,24 +66,40 @@
     <Engine name="Standalone"
             defaultHost="localhost"
             debug="0">
-      <Host name="localhost"
-            debug="0"
-            appBase="webapps"
-            unpackWARs="true"
-            autoDeploy="false"
-            startStopThreads="4">
-        <Context path="{{ atl_tomcat_contextpath | default(catalina_context_path) | default('') }}"
-                 docBase="../confluence"
-                 debug="0"
-                 reloadable="false"
-                 useHttpOnly="true">
-          <!-- Logging configuration for Confluence is specified in confluence/WEB-INF/classes/log4j.properties -->
-          <Manager pathname=""/>
-          <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve"
-                 threshold="60"/>
-          <Valve className="org.apache.catalina.authenticator.NonLoginAuthenticator"
-                disableProxyCaching="true" securePagesWithPragma="false" />
-        </Context>
+       <Host name="localhost"
+                  debug="0"
+                  appBase="webapps"
+                  unpackWARs="true"
+                  autoDeploy="false"
+                  startStopThreads="4">
+          <Context path="{{ atl_tomcat_contextpath | default(catalina_context_path) | default('') }}"
+                           docBase="../confluence"
+                           debug="0"
+                           reloadable="false"
+                           useHttpOnly="true">
+                    <!-- Logging configuration for Confluence is specified in confluence/WEB-INF/classes/log4j.properties -->
+                    <Manager pathname=""/>
+                    <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve"
+                           threshold="60"/>
+                  {% if atl_tomcat_access_log == 'true' %}
+                    <Valve className="org.apache.catalina.valves.AccessLogValve"
+                           requestAttributesEnabled="true"
+                           directory="logs"
+                           prefix="confluence_access"
+                           suffix=".log"
+                           rotatable="true"
+                           pattern="%h %{X-AUSERNAME}o %t &quot;%r&quot; %s %b %D %U %I &quot;%{User-Agent}i&quot;" />
+                    <Valve className="org.apache.catalina.valves.RemoteIpValve"
+                           proxiesHeader="x-forwarded-by"
+                           internalProxies="{{ atl_tomcat_proxy_internal_ips | default('') }}"
+                           remoteIpHeader="x-forwarded-for"
+                           protocolHeader="x-forwarded-proto"
+                           requestAttributesEnabled="true"
+                           resolveHosts="false" />
+                  {% endif %}
+                <Valve className="org.apache.catalina.authenticator.NonLoginAuthenticator"
+                      disableProxyCaching="true" securePagesWithPragma="false" />
+          </Context>
 
         <Context path="${confluence.context.path}/synchrony-proxy"
                  docBase="../synchrony-proxy"
@@ -89,7 +109,7 @@
           <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve"
                  threshold="60"/>
           <Valve className="org.apache.catalina.authenticator.NonLoginAuthenticator"
-                          disableProxyCaching="true" securePagesWithPragma="false" />
+                disableProxyCaching="true" securePagesWithPragma="false" />
         </Context>
 
       </Host>
