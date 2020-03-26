@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import shutil
 
-from entrypoint_helpers import env, gen_cfg, str2bool, start_app, set_perms, set_ownership, activate_ssl
+from entrypoint_helpers import env, gen_cfg, str2bool, start_app, set_perms, set_ownership, activate_ssl, sed
 
 
 RUN_USER = env['run_user']
@@ -9,8 +9,11 @@ RUN_GROUP = env['run_group']
 CONFLUENCE_INSTALL_DIR = env['confluence_install_dir']
 CONFLUENCE_HOME = env['confluence_home']
 CONFLUENCE_CFG_OVERWRITE =  env.get('atl_confluence_cfg_overwrite', False)
+CONFLUENCE_TLS_PROTOCOLS = env.get('atl_confluence_tls_protocols', 'TLSv1.1,TLSv1.2')
 
 SSL_ENABLED = env['atl_sslenabled']
+
+sed('TLSv1.1,TLSv1.2', CONFLUENCE_TLS_PROTOCOLS, f'{CONFLUENCE_INSTALL_DIR}/bin/setenv.sh'')
 
 
 if SSL_ENABLED == 'True' or SSL_ENABLED == True or SSL_ENABLED == 'true' :
