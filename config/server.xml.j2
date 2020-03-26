@@ -46,7 +46,7 @@
                  proxyName="{{ atl_proxy_name | default(catalina_connector_proxyname) | default('') }}"
                  proxyPort="{{ atl_proxy_port | default(catalina_connector_proxyport) | default('') }}"
                  clientAuth="false"
-                 sslProtocols="TLSv1,TLSv1.1,TLSv1.2"
+                 sslProtocols="TLSv1,TLSv1.1,TLSv1.2,TLSv1.3"
                  sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2,TLSv1.3"
                  SSLEnabled="{{ atl_sslenabled | default('false') }}"
                  SSLCertificateFile="{{ atl_certificate_location | default('/opt/atlassian/etc/certificate.crt') }}"
