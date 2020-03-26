@@ -13,7 +13,7 @@ CONFLUENCE_TLS_PROTOCOLS = env.get('atl_confluence_tls_protocols', 'TLSv1.1,TLSv
 
 SSL_ENABLED = env['atl_sslenabled']
 
-sed('TLSv1.1,TLSv1.2', CONFLUENCE_TLS_PROTOCOLS, f'{CONFLUENCE_INSTALL_DIR}/bin/setenv.sh'')
+sed('TLSv1.1,TLSv1.2', CONFLUENCE_TLS_PROTOCOLS, f'{CONFLUENCE_INSTALL_DIR}/bin/setenv.sh')
 
 
 if SSL_ENABLED == 'True' or SSL_ENABLED == True or SSL_ENABLED == 'true' :
