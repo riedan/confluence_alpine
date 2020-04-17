@@ -36,7 +36,7 @@
 
      <Connector port="{{ atl_tls_tomcat_port | default('8443') }}"
                  maxHttpHeaderSize="8192"
-                 maxThreads="{{ atl_tomcat_maxthreads | default('150') }}"
+                 maxThreads="{{ atl_tomcat_maxthreads | default('100') }}"
                  minSpareThreads="{{ atl_tomcat_minsparethreads | default('25') }}"
                  maxSpareThreads="{{ atl_tomcat_maxsparethreads | default('75') }}"
                  enableLookups="false"
