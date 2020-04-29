@@ -30,7 +30,7 @@ RUN ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so \
     && ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
 ENV LD_LIBRARY_PATH /usr/lib
 
-ARG CONFLUENCE_VERSION=7.4.0
+ARG CONFLUENCE_VERSION=7.3.5
 ARG DOWNLOAD_URL=https://product-downloads.atlassian.com/software/confluence/downloads/atlassian-confluence-${CONFLUENCE_VERSION}.tar.gz
 
 
