@@ -45,7 +45,7 @@
       <property name="hibernate.dialect">com.atlassian.confluence.impl.hibernate.dialect.{{ databases[atl_db_type][1] }}</property>
       <property name="hibernate.database.lower_non_ascii_supported">true</property>
       <property name="hibernate.c3p0.min_size">{{ atl_db_poolminsize | default('20') }}</property>
-      <property name="hibernate.c3p0.max_size">{{ atl_db_poolmaxsize | default('100') }}</property>
+      <property name="hibernate.c3p0.max_size">{{ atl_db_poolmaxsize | default('80') }}</property>
       <property name="hibernate.c3p0.timeout">{{ atl_db_timeout | default('30') }}</property>
       <property name="hibernate.c3p0.idle_test_period">{{ atl_db_idletestperiod | default('100') }}</property>
       <property name="hibernate.c3p0.max_statements">{{ atl_db_maxstatements | default('0') }}</property>

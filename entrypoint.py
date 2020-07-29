@@ -15,7 +15,6 @@ SSL_ENABLED = env['atl_sslenabled']
 
 sed('TLSv1.1,TLSv1.2', CONFLUENCE_TLS_PROTOCOLS, f'{CONFLUENCE_INSTALL_DIR}/bin/setenv.sh')
 
-
 if SSL_ENABLED == 'True' or SSL_ENABLED == True or SSL_ENABLED == 'true' :
     PATH_KEYSTORE = env.get('atl_certificate_location', '/opt/atlassian/confluence/keystore')
     PASSWORD_KEYSTORE = env.get('atl_certificate_password', "changeit")
