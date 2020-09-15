@@ -42,8 +42,10 @@ gen_cfg('confluence.cfg.xml.j2', f'{CONFLUENCE_HOME}/confluence.cfg.xml',
 set_ownership(f'{CONFLUENCE_INSTALL_DIR}/logs',  user=RUN_USER, group=RUN_GROUP)
 set_ownership(f'{CONFLUENCE_INSTALL_DIR}/temp',  user=RUN_USER, group=RUN_GROUP)
 set_ownership(f'{CONFLUENCE_INSTALL_DIR}/work',  user=RUN_USER, group=RUN_GROUP)
+set_ownership(f'{CONFLUENCE_INSTALL_DIR}/conf',  user=RUN_USER, group=RUN_GROUP)
+set_ownership(f'{CONFLUENCE_INSTALL_DIR}/bin',  user=RUN_USER, group=RUN_GROUP)
 
 shutil.chown(CONFLUENCE_HOME, user=RUN_USER, group=RUN_GROUP)
-shutil.chown(CONFLUENCE_INSTALL_DIR, user=RUN_USER, group=RUN_GROUP)
+
 
 start_app(f'{CONFLUENCE_INSTALL_DIR}/bin/start-confluence.sh -fg', CONFLUENCE_HOME, name='Confluence')
