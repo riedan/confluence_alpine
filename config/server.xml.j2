@@ -28,14 +28,14 @@
                 relaxedPathChars="[]|"
                 relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;"
                 bindOnInit="false"
-                maxHttpHeaderSize="{{ atl_tomcat_maxHttpHeaderSize | default('8192') }}"
+                maxHttpHeaderSize="{{ atl_tomcat_maxhttpheadersize | default('8192') }}"
                 useBodyEncodingForURI="true"
                 disableUploadTimeout="true" />
 
     {% if atl_sslenabled == 'true'  or atl_sslenabled == 'True' or atl_sslenabled == True  %}
 
      <Connector port="{{ atl_tls_tomcat_port | default('8443') }}"
-                 maxHttpHeaderSize="{{ atl_tomcat_maxHttpHeaderSize | default('8192') }}"
+                 maxHttpHeaderSize="{{ atl_tomcat_maxhttpheadersize | default('8192') }}"
                  maxThreads="{{ atl_tomcat_maxthreads | default('100') }}"
                  minSpareThreads="{{ atl_tomcat_minsparethreads | default('25') }}"
                  maxSpareThreads="{{ atl_tomcat_maxsparethreads | default('75') }}"
