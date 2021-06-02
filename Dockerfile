@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:alpine
+FROM adoptopenjdk/openjdk8:jdk8u275-b01-alpine
 
 ENV RUN_USER                                        confluence
 ENV RUN_GROUP                                       confluence
