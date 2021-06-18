@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jdk-11.0.11_9-alpine
+FROM adoptopenjdk/openjdk11:jdk-11.0.8_10-alpine
 
 ENV RUN_USER                                        confluence
 ENV RUN_GROUP                                       confluence
